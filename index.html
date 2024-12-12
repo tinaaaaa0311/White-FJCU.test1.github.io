@@ -1,83 +1,287 @@
-<body>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>心理測驗</title>
-  <style>
-    body {
-      font-family: Arial;
-      background-color:LightCoral;
-    }
-    
-    .question {
-      margin-bottom: 10px;
-     
-       border: 5px solid #f5f5f5; 
-    }
-     .smaller-image {
-            width: 300px;
-           height: 300px; 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聖誕風格網站</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
         }
-    .options input {
-      margin-right: 10px;
-    }
-     #result {
-      display: none;
-      font-weight: bold;
-    }
-   
-  </style>
+
+        header {
+            text-align: center;
+            background-color: #d32f2f;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .button-container button {
+            background-color: #388e3c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button-container button:hover {
+            background-color: #2e7d32;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #ddd;
+            padding: 20px 0;
+            flex-direction: column;
+        }
+
+        .content:nth-child(even) {
+            flex-direction: column;
+        }
+
+        .content .title {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .content .image-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+        }
+        .content .image-containers {
+            position: relative;
+            width: 500px;
+            height: 330px;
+        }
+        .content .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            position: absolute;
+            display: none;
+        }
+
+        .content .image-container img.active {
+            display: block;
+        }
+
+        .content .text {
+            flex: 1;
+            margin: 20px 0;
+        }
+
+        .content .image-navigation {
+            margin-top: 10px;
+        }
+
+        .content .image-navigation button {
+            background-color: #388e3c;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .content .image-navigation button:hover {
+            background-color: #2e7d32;
+        }
+
+        .content .image-containers img {
+            width: 100%; /* 設置橫向長方形 */
+            object-fit: cover; /* 確保圖片按比例填滿容器 */
+            /* 可用於設定寬高比例 */
+        }
+    </style>
 </head>
 <body>
-  <h1 style="text-align: center;">心理測驗</h1>
-  
-  <div class="question" style="text-align: center;">
-    <p>選擇一種小動物，看看你朋友對你真實評價</p>
-    <div class="options" style="display: flex; flex-direction: column; align-items: center;">
-       <a href="#"><img class="smaller-image" src="https://img.onl/9hfok3" alt="松鼠"></a>
-      <input type="radio" name="q1" value="a">松鼠<br>
-       <a href="#"><img class="smaller-image" src="https://img.onl/4PxiHF" alt="無尾熊"></a>
-      <input type="radio" name="q1" value="b">無尾熊<br>
-       <a href="#"><img class="smaller-image" src="https://img.onl/2WDnP3" alt="綿羊"></a>  
-      <input type="radio" name="q1" value="c">綿羊<br>
-        <a href="#"><img class="smaller-image" src="https://img.onl/npblrg" alt="長頸鹿"></a>
-        <input type="radio" name="q1" value="d">長頸鹿<br>
-        <a href="#"><img class="smaller-image" src="https://img.onl/WZiqUn" alt="小鹿"></a>
-      <input type="radio" name="q1" value="e">小鹿<br>
-      <p>按下方按鈕查看答案</p>
+    <header>
+        <h1>節慶觀光-板橋新北耶誕城</h1>
+        <h2>第五組內容及心得!</h2>
+    </header>
+
+    <div class="button-container">
+        <button onclick="scrollToSection('section1')">活動之由來</button>
+        <button onclick="scrollToSection('section2')">活動簡易資訊</button>
+        <button onclick="scrollToSection('section3')">活動優點/缺點</button>
+        <button onclick="scrollToSection('section4')">活動內涵</button>
+        <button onclick="scrollToSection('section5')">心得/想法</button>
+        <button onclick="scrollToSection('section6')">組員介紹/影片連結</button>
     </div>
-  </div>
-  
-  <div style="text-align: center;">
-    <button onclick="calculateResult()">按我按我!</button>
-    
-    <div id="result" style="font-weight: bold;"></div>
-  </div>
-  
-  <script>
-    function calculateResult() {
-      var q1Answer = document.querySelector('input[name="q1"]:checked').value;
-      
-      var result = "";
-      
-      if (q1Answer === "a" ) {
-        result = "你的察覺能力很強，是朋友心中的靠山!";
-      } else if (q1Answer === "b") {
-        result = "你是個嚮往寧靜生活的人，會專注在自己喜歡的事物上。";
-      } else if (q1Answer === "c" ) {
-        result = "你很清楚自己的目標，會積極地找尋人生方向。";
-      } 
-      else if (q1Answer === "d" ) {
-        result = "你是個自律的人，完美主義者。";
-      } 
-      else {
-        result = "不論發生什麼事情，你都會給予朋友幫助。";
-      }
-      
-      document.getElementById("result").innerHTML = result;
- document.getElementById("result").style.display = "block";
-    }
-  </script>
+
+    <div id="section1" class="content">
+        <div class="title">活動之由來</div>
+        <div class="image-container">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/1a.png?raw=true" alt="圖片 1a" class="active">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/1b.png?raw=true" alt="圖片 1b">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/1c.png?raw=true" alt="圖片 1c">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/1d.png?raw=true" alt="圖片 1d">
+        </div>
+        <div class="image-navigation">
+            <button onclick="changeImage('section1', -1)">上一張</button>
+            <button onclick="changeImage('section1', 1)">下一張</button>
+        </div>
+        <div class="text">
+            <p>新北耶誕城可追溯至2009年，新北市政府想要打造一個有國際特色的聖誕節活動，所以決定在板橋區舉辦一個耶誕市集及燈飾展示，希望吸引遊客，帶動地方經濟發展。2010年一開始只是小小的規模活動，但越來越知名後，活動規模也越來越大。也成為台灣冬季節慶重要的代表之一。</p>
+            <p>而今年這次的主燈為魔幻天使，透過聲光效果變換顏色，表現出無與倫比的魔幻力量,不同面貌的呈現，像是可變裝的「變裝派對」。</p>
+        </div>
+    </div>
+
+    <div id="section2" class="content">
+        <div class="title">活動簡易資訊</div>
+        <div class="image-containers">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/2a.png?raw=true" alt="圖片 2a" >
+        </div>
+        <div class="text">
+            <p><strong>一、活動日期</strong></p>
+            <p>活動日期：2024.11.15～2025.1.1</p>
+            <p>周邊燈飾亮燈時間：每日17:30～23:00</p>
+            <p>遊樂設施開放時間：每日11:00～22:00</p>
+            <p><strong>二、交通資訊: </strong></p> 
+            <p>捷運:板橋站</p>
+            <p>火車:板橋車站</p>
+            <p>公車:新北市政府(新府路)、新北市政府(中山路)、新北板橋公車站、板橋車站(文化路)、捷運府中站(府中路)、捷運府中站(縣民大道)</p>
+            <p><strong>三、演唱會卡司:</strong></p>
+            <p>12/14（六）：
+                艾怡良、陳華、白安、李東軒、GX（呂思緯、蕭秉治）、熊仔、八三夭、孝琳</p>
+                <p>12/15（日）：
+                    理想混蛋、icyball冰球樂團、洪暐哲、BOOM！怪物新人、AcQUA源少年R.Y.G.、Ozone、宇宙人、Energy、告五人</p>
+                    <p>更多詳情請參考耶誕成官網: <a href="https://newtaipei.travel/zh-tw/calendar/detail/2887" target="_blank">資訊請點這裡!</a>。</p>       
+            <p>或是新聞稿: <a href="https://www.cw.com.tw/article/5132797" target="_blank">資訊請點這裡!</a>。</p>
+        </div>
+    </div>
+
+    <div id="section3" class="content">
+        <div class="title">活動優點/缺點</div>
+        <div class="image-container">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/3a.png?raw=true" alt="圖片 3a" class="active">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/3b.png?raw=true" alt="圖片 3b">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/3c.png?raw=true" alt="圖片 3c">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/3d.png?raw=true" alt="圖片 3d">
+        </div>
+        <div class="image-navigation">
+            <button onclick="changeImage('section3', -1)">上一張</button>
+            <button onclick="changeImage('section3', 1)">下一張</button>
+        </div>
+        <div class="text">
+            <p><strong>優點:</strong>耶誕城的展場大且展期長，足以讓人們找時間前往欣賞，今年的展覽內容也十分豐富，多樣的造景，小小兵主題的商店都讓整個耶誕城熱鬧許多。板橋交通方便，捷運、火車、公車皆可以到達，周邊商圈美食、遊玩、購物的內容也很多元</p>
+            <p><strong>缺點:</strong>人潮多是最多人反應的缺點，因為會很難逛街跟拍照。這也跟第二點板橋人的惡夢有關，每次到了耶誕城期間，板橋的交通就會變的很堵塞。
+                然後近幾年越來越多人選擇去信義區耶誕城，因為那邊的裝置藝術有特別跟藝術家合作，而且每個商店也會有獨特的擺設，很多人說比板橋有質感許多～</p>
+        </div>
+    </div>
+
+    <div id="section4" class="content">
+        <div class="title">活動內涵</div>
+        <div class="image-container">
+            <img src="https://www.welcometw.com/wp-content/uploads/2024/12/light_area_a08-850x638.jpg" alt="圖片 4a" class="active">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/4b.png?raw=true" alt="圖片 4b">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/44.png?raw=true" alt="圖片 4b">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/4c.png?raw=true" alt="圖片 4c">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/4d.png?raw=true" alt="圖片 4d">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/4f.png?raw=true" alt="圖片 4d">
+        </div>
+        <div class="image-navigation">
+            <button onclick="changeImage('section4', -1)">上一張</button>
+            <button onclick="changeImage('section4', 1)">下一張</button>
+        </div>
+        <div class="text">
+            <p><strong>音樂與表演:</strong> 舉辦演唱會讓大家一同感受耶誕節的氛圍</p>
+            <p><strong>耶誕燈飾與裝置藝術:</strong>作品包含魔幻天使、暮光之城、魔法耶誕嘉年華等等....提供民眾打卡</p>
+            <p><strong>魔幻耶誕童話派對創意市集:</strong>販售各類美食、頭飾、創意產品等等...</p>
+            <p><strong>親子互動區域:</strong>摩天輪、小火車、旋轉木馬諸多選擇可以供家長跟小孩互動</p>
+        </div>
+    </div>
+
+    <div id="section5" class="content">
+        <div class="title">心得/想法</div>
+        <div class="image-container">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/5a.png?raw=true" alt="圖片 5a" class="active">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/5c.png?raw=true" alt="圖片 5c">
+            
+        </div>
+        <div class="image-navigation">
+            <button onclick="changeImage('section5', -1)">上一張</button>
+            <button onclick="changeImage('section5', 1)">下一張</button>
+        </div>
+        <div class="text">
+            <p><strong>想法:</strong>雖然網路上多是說板橋耶誕城造景不好，且一年比一年差，但實際去那邊後覺得裝置滿用心的，而且也有許多活動和市集攤位，並沒有網路評價的那麼糟。By宗摯</p>
+          
+            <p><strong>心得:</strong>開心有這樣的機會跟大家一同出遊，雖然是在通識課上認識，相處的時間也很短暫，但在每次上課討論及出遊的過程，我得到了許多美好的回憶，謝謝大家，也謝謝耶誕城，最後祝福大家耶誕節快樂!By和序</p>
+          
+        </div>
+    </div>
+
+    <div id="section6" class="content">
+        <div class="title">組員介紹/影片連結</div>
+        <div class="image-container">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/6a.png?raw=true" alt="圖片 6a" class="active">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/6b.png?raw=true" alt="圖片 6b">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/6c.PNG?raw=true" alt="圖片 6c">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/6d.png?raw=true" alt="圖片 6d">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/6e.png?raw=true" alt="圖片 6e">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/6f.png?raw=true" alt="圖片 6f">
+            <img src="https://github.com/tinaaaaa0311/FJCUXmas/blob/main/%E9%80%9A%E8%AD%98%E8%AA%B2/images/6g.png?raw=true" alt="圖片 6g">
+        </div>
+        <div class="image-navigation">
+            <button onclick="changeImage('section6', -1)">上一張</button>
+            <button onclick="changeImage('section6', 1)">下一張</button>
+        </div>
+        <div class="text">
+            </html></p><p>1.資工三的和序，擔任一個氣氛組的角色</p>
+            <p>2.資工三的睿揚，最高但也最社恐，手很長可以當人體支架</p>
+            <p>3.資工三的柏宇，擔任美食組，總是拿著食物問大家要不要吃，十分貼心</p>
+            <p>4.餐旅一的怡辰，恭喜抽到最喜歡的小小兵，果然是快樂耶誕節</p>
+            <p>5.臨心四地宗摯，作為的報告領導，十分快速地完成了簡報</p>
+            <p>6.中文一的諺廷，遲到半小時只能放醜照喔</p>
+            <p>7.柏宇同學特聘的攝影師</p>
+            <p>最後是影片連結: <a href="https://youtu.be/nlhj7FXxQCc" target="_blank">點下去會幸運一整年</a>。</p>
+        </div>
+    </div>
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function changeImage(sectionId, direction) {
+            const section = document.getElementById(sectionId);
+            const images = section.querySelectorAll('.image-container img');
+            let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + direction + images.length) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+    </script>
 </body>
-
-
 </html>
